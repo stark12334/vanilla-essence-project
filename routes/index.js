@@ -19,19 +19,18 @@ router.get('/index',(req,res,next)=>{
 });
 
 router.post('/index',(req,res,next)=>{
-    // db.products_new.save({
-    //     id: req.id,
-    //     title: req.title,
-    //     picUrl: req.picUrl
-    // },(err,saved)=>{
-    //   if(err || !saved){
-    //       console.log("User not Saved");
-    //   } 
-    //   else{
-    //       console.log(id);
-    //   }
-    // });
-    console.log(req);
+    db.products_new.save({
+        id: req.id,
+        title: req.title,
+        picUrl: req.picUrl
+    },(err,saved)=>{
+      if(err || !saved){
+          console.log("User not Saved");
+      } 
+      else{
+          console.log("saved");
+      }
+    });
 });
 
 module.exports = router;
