@@ -4,6 +4,9 @@ let mongojs = require('mongojs');
 let options = require('../options');
 let databaseUrl = "mongodb://debo12:debo1234@ds018538.mlab.com:18538/practice-db";
 var collections = ["products_new"];
+var AWS = require('aws-sdk');
+
+var s3 = new AWS.S3();
 
 // storing Database url and collection name 
 var db = require("mongojs")(databaseUrl);
@@ -20,7 +23,6 @@ router.get('/index',(req,res,next)=>{
 
 router.post('/index',(req,res,next)=>{
     db.products_new.save({
-        id: req.body.id,
         title: req.body.title,
         picUrl: req.body.picUrl
     },(err,saved)=>{
@@ -28,9 +30,20 @@ router.post('/index',(req,res,next)=>{
           console.log("User not Saved");
       } 
       else{
-          console.log("saved");
+          sConnect();
       }
     });
 });
+
+function sConnect(){
+    var myBucket = 'my.unique.bucket.name';
+
+    var myKey = 'myBucketKey';
+    
+    s3.upload(params, function(err, data) {
+        console.log(err, data);
+    });
+}
+    
 
 module.exports = router;
