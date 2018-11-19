@@ -20,9 +20,9 @@ router.get('/index',(req,res,next)=>{
 
 router.post('/index',(req,res,next)=>{
     db.products_new.save({
-        id: req.id,
-        title: req.title,
-        picUrl: req.picUrl
+        id: req.body.id,
+        title: req.body.title,
+        picUrl: req.body.picUrl
     },(err,saved)=>{
       if(err || !saved){
           console.log("User not Saved");
